@@ -17,6 +17,4 @@ python -u ../src/extract_hidden.py \
 	--extract_harmful_token_only 0 \
 	--batch_size 1 \
 	--ret_whole_seq 0 \
-	--model_size "7b" \
-	--load_ckpt 0 \
 	--mode_dir "${11}"
