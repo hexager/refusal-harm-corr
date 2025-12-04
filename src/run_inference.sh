@@ -14,7 +14,7 @@ python -u ../src/inference.py \
 	--model_size "7b" \
 	--record_prob_max_pos 0 \
 	--use_template 1 \
-	--do_not_use_last_inst_tok 1 \
+	--do_not_use_last_inst_tok 0 \
 	--use_inversion 0 \
 	--inversion_prompt_idx 6
 
