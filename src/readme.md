@@ -9,8 +9,7 @@ Key parameters:
 - `--use_inversion`: Whether to do reply inversion (1/0)
 - `--intervene_context_only`: Whether to only apply intervention to tokens before the inversion question. set as 1 when running reply inversion task with harmfulness directions
   
-When doing reply inversion, set ``inversion_prompt_idx`` as 1 for Qwen, while 0 for Llama3 to choose the according reply inversion question (the index corresponds to the list in ``template_inversion.py``). We find models may not always follow the reply inversion question.
-We tried different choices in ``all_inversion_template.py`` to find the one that works for the according tested model and the steering direction. However, we still observe sometimes the model ignores the reply inversion question. Overall, we consider the reply inversion experiment as a proof of existence where the harmfulness direction and the refusal direction show different behaviors.
+When doing reply inversion, we set ``inversion_prompt_idx`` as 1 for Qwen, while 0 for Llama3 to choose the according reply inversion question (the index corresponds to the list in ``template_inversion.py``). We find models may not always follow the reply inversion question. So, we tried different choices in ``all_inversion_template.py`` to pick the one that works for the according tested model and the steering direction. However, we still observe that sometimes the model ignores the reply inversion question. Overall, we consider the reply inversion experiment as a proof of existence where the harmfulness direction and the refusal direction show different behaviors.
 
 For evaluation,
 use ```python eval.py ``` 
