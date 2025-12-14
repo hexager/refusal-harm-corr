@@ -27,7 +27,7 @@ import functools
 import numpy as np
 from template_inversion import inversion_prompts_choice
 import random
-from path import *
+#from path import *
 
 # Constants
 DECODING_STEP = 3
@@ -79,9 +79,10 @@ def get_activation_addition_input_pre_hook(
             activation = input
         
         vector = vector.to(activation)
-        
+        print('vector shape', vector.shape)
+        print('activation shape', activation.shape)
         if DECODING_STEP == -1 or COUNT_ADD < DECODING_STEP:  # when equal to -1, till end of generation
-            assert coeff != 0
+            #assert coeff != 0
             if intervene_all:
                 activation += coeff * vector
             else:
@@ -193,7 +194,7 @@ def complete_with_intervention(
                 return_dict_in_generate=True,
                 output_scores=True,
                 output_attentions=True,
-                use_cache=not args['mask_attn_token']
+                use_cache=True
             )
                 
             generated_scores = generation_toks.scores
@@ -301,7 +302,7 @@ def main():
     MODEL = params['model']
     
     # Parse list arguments
-    params['intervene_pos'] = list(map(int, params['intervene_pos'].split()))
+    #params['intervene_pos'] = list(map(int, params['intervene_pos'].split()))
     params['positions'] = list(map(int, params['positions'].split()))
     
 
