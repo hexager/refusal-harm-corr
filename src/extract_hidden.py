@@ -76,7 +76,7 @@ def get_mean_activations_pre_hook(
             cache_full[layer].append(activation.clone().detach().cpu())
         else:
             if seq_len >= len(positions):
-                print('extracting positions', positions)
+                #print('extracting positions', positions)
                 assert isinstance(positions[0], int)
                 context = activation[:, -len(positions)-step:-len(positions), :]
                 pos_activations = activation[:, positions, :]
