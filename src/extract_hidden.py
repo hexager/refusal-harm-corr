@@ -68,6 +68,8 @@ def get_mean_activations_pre_hook(
     """
     def hook_fn(module: torch.nn.Module, input: Tuple[Tensor, ...]) -> None:
         activation = input[0].half()
+        if activation.dim() == 2:
+            activation = activation.unsqueeze(0)
         seq_len = activation.shape[1]
         
         if whole_seq:
@@ -364,8 +366,8 @@ def main() -> None:
         )
         tokenizer.pad_token = tokenizer.eos_token
     elif MODEL == 'qwen':
-        tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2-7B-Instruct", trust_remote_code=True, cache_dir='models/qwen')
-        model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2-7B-Instruct", device_map="auto", trust_remote_code=True, cache_dir='models/qwen')
+        tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2-7B-Instruct", trust_remote_code=True)
+        model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2-7B-Instruct", device_map="auto", trust_remote_code=True)
 
     if params['extract_hidden_inst_token']:
         inst_token = "[/INST]"
