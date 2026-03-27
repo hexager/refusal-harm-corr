@@ -109,6 +109,8 @@ def get_mean_activations_fwd_hook(
     """
     def hook_fn(module: torch.nn.Module, input: Tuple[Tensor, ...], output: Tuple[Tensor, ...]) -> None:
         activation = output[0].half()
+        if activation.dim() == 2:
+            activation = activation.unsqueeze(0)
         seq_len = activation.shape[1]
         
         if whole_seq:
