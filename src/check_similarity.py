@@ -18,7 +18,7 @@ CATEGORIES = [
 # Load all directions
 dirs = []
 for fname, label in CATEGORIES:
-    d = torch.load(f"run/qwen2-dir-{fname}.pt", map_location="cpu").float()
+    d = torch.load(f"../run/qwen2-dir-{fname}.pt", map_location="cpu").float()
     dirs.append(d)
 
 # Stack [n_categories, n_layers, hidden_dim]
