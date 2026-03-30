@@ -67,7 +67,9 @@ def main():
     harm_norms       = data["harm_norms"].numpy()
     ref_norms        = data["ref_norms"].numpy()
     acceptance       = data["acceptance_rates"].numpy() * 100  # percent
-    mean_sim_matrix  = data["mean_sim_matrix"].numpy()
+    dir_data = torch.load(os.path.join(args.results_dir, "directions_analysis.pt"),
+                        map_location="cpu")
+    mean_sim_matrix = dir_data["mean_sim_matrix"].numpy()
     ls, le           = data["layer_start"].item(), data["layer_end"].item()
 
     short = CAT_SHORT
