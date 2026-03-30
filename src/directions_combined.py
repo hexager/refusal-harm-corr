@@ -139,6 +139,9 @@ def main():
         "layer_end"           : le,
     }, out_path)
     print(f"\nSaved -> {out_path}")
+    print("\nRef norms vs acceptance rates:")
+    for i, label in enumerate(labels_str):
+        print(f"  {label:<35}  ref_norm={ref_norms[i]:.4f}  accept={acceptance_rates[i]*100:.1f}%")
 
 
 if __name__ == "__main__":
