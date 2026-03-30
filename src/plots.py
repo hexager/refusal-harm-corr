@@ -70,7 +70,7 @@ def main():
     dir_data = torch.load(os.path.join(args.results_dir, "directions_analysis.pt"),
                         map_location="cpu")
     mean_sim_matrix = dir_data["mean_sim_matrix"].numpy()
-    ls, le           = data["layer_start"].item(), data["layer_end"].item()
+    ls, le = data["layer_start"], data["layer_end"]
 
     short = CAT_SHORT
 
