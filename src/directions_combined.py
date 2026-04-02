@@ -2,7 +2,7 @@ import os
 import argparse
 import torch
 import torch.nn.functional as F
-
+import numpy as np
 CATEGORIES = [
     ("Adult Content",              "Adult Content"),
     ("Child Abuse",                "Child Abuse"),
