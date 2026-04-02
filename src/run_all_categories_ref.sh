@@ -40,5 +40,9 @@ for cat in "${FILENAMES[@]}"; do
         "../run/qwen2-refuse-harmless.pt" \
         0 200 0 "qwen" "refuse"
     echo "Done: $cat"
+    gc.collect()
+    torch.cuda.empty_cache()
+    torch.cuda.ipc_collect()
+
 done
 EOF
