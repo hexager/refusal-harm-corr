@@ -143,6 +143,22 @@ def main():
     for i, label in enumerate(labels_str):
         print(f"  {label:<35}  ref_norm={ref_norms[i]:.4f}  accept={acceptance_rates[i]*100:.1f}%")
 
-
+    print(f"\n── Robustness check: r without near-zero acceptance categories ─────────")
+    thresholds = [5, 10]
+    for thresh in thresholds:
+        mask = acceptance_rates.numpy() > (thresh / 100)
+        n_kept = mask.sum()
+        if n_kept < 4:
+            print(f"  threshold>{thresh}%: only {n_kept} categories, skipping")
+            continue
+        kept_cats = [labels_str[i] for i, m in enumerate(mask) if m]
+        print(f"\n  threshold>{thresh}% (n={n_kept}): {kept_cats}")
+        for name, vals in metrics.items():
+            vals_np = vals.numpy() if hasattr(vals, 'numpy') else vals
+            r_full    = pearson_r(vals_np, acceptance_rates.numpy())
+            r_trimmed = pearson_r(vals_np[mask], acceptance_rates.numpy()[mask])
+            change = r_trimmed - r_full
+            print(f"    {name:<30}  r_full={r_full:>7.4f}  r_trimmed={r_trimmed:>7.4f}  "
+                f"delta={change:>+7.4f}  {'HOLDS' if abs(r_trimmed) > 0.5 else 'WEAKENS'}")
 if __name__ == "__main__":
     main()
