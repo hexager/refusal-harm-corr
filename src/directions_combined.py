@@ -25,12 +25,9 @@ FILTER_FILENAMES = [
 ]
 
 
-def pearson_r(x: torch.Tensor, y: torch.Tensor) -> float:
-    x_mean = x.mean()
-    y_mean = y.mean()
-    num    = ((x - x_mean) * (y - y_mean)).sum()
-    denom  = ((x - x_mean)**2).sum().sqrt() * ((y - y_mean)**2).sum().sqrt()
-    return (num / denom).item()
+def pearson_r(x, y):
+    x, y = np.array(x, dtype=np.float64), np.array(y, dtype=np.float64)
+    return np.corrcoef(x, y)[0, 1]
 
 
 def off_diagonal_means(dirs_normed: torch.Tensor, layer_start: int, layer_end: int) -> torch.Tensor:
