@@ -40,8 +40,5 @@ for cat in "${FILENAMES[@]}"; do
         "../run/qwen2-harmless.pt" \
         0 200 0 "qwen" "hf"
     echo "Done: $cat"
-    gc.collect()
-    torch.cuda.empty_cache()
-    torch.cuda.ipc_collect()
 done
 EOF

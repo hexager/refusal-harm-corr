@@ -11,7 +11,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import contextlib
 import functools
 import random
-
+import gc
 
 MODEL = ''
 NUM_TOKEN_HIDDEN = 2  # by default, we extract NUM_TOKEN_HIDDEN tokens + all special post-instruction tokens
@@ -405,6 +405,8 @@ def main() -> None:
 
     candidate_directions = generate_directions(model, tokenizer, harmful_train, harmless_train, params)
     print(candidate_directions.shape)
-
+    gc.collect()
+    torch.cuda.empty_cache()
+    torch.cuda.ipc_collect()
 if __name__ == "__main__":
     main()
